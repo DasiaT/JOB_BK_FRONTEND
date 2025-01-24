@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import {IUser, IProfile } from './Interfaces/IUser';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { toast } from 'react-toastify';
+//PARA LOS USUARIOS
+import {IUser, IProfile } from './Interfaces/User';
 
 function Login() {
     const [user, setUser] = useState<IUser | null>(null);
@@ -9,7 +11,7 @@ function Login() {
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUser(codeResponse as IUser),
-        onError: (error) => console.log('Login Failed:', error),
+        onError: (error) => toast(`Error de login: ${error}`),
     });
 
     useEffect(() => {
@@ -17,12 +19,12 @@ function Login() {
             axios
                 .get<IProfile>(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=381023784359-2efkdnkr1j5s23ual1n4hg8bmjf1je2q.apps.googleusercontent.com`, {
                     headers: {
-                        Authorization: `Bearer ${user.access_token}`,
+                        Authorization: `Bearer 381023784359-2efkdnkr1j5s23ual1n4hg8bmjf1je2q.apps.googleusercontent.com`,
                         Accept: 'application/json',
                     },
                 })
                 .then((res) => setProfile(res.data))
-                .catch((err) => console.log(err));
+                .catch((err) => toast(err));
         }
     }, [user]);
 
