@@ -1,25 +1,26 @@
 import { FC, useState } from "react";
 import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
-import { Home, Bookmark, User, Utensils, Beer, Coffee, MapPin, Pizza } from "lucide-react";
+//import { Home, Bookmark, User, MapPin } from "lucide-react";
 import { IMenuProps } from "../Interface/Imenu";
+import { pages_settings } from "./Menu_Estructura";
 
-const categories = [
-  { name: "Bars & Hotels", places: 42, icon: <Beer size={32} />, bg: "#f3f4f6" },
-  { name: "Fine Dining", places: 15, icon: <Utensils size={32} />, bg: "#f3f4f6" },
-  { name: "Cafes", places: 28, icon: <Coffee size={32} />, bg: "#f3f4f6" },
-  { name: "Nearby", places: 34, icon: <MapPin size={32} />, bg: "#facc15" },
-  { name: "Fast Foods", places: 29, icon: <Utensils size={32} />, bg: "#f3f4f6" },
-  { name: "Featured Foods", places: 21, icon: <Pizza size={32} />, bg: "#f3f4f6" },
-];
+/*const categories = [
+  { name: "Bars & Hotels", icon: <Beer size={32} />, bg: "#f3f4f6" },
+  { name: "Fine Dining", icon: <Utensils size={32} />, bg: "#f3f4f6" },
+  { name: "Cafes", icon: <Coffee size={32} />, bg: "#f3f4f6" },
+  { name: "Nearby", icon: <MapPin size={32} />, bg: "#facc15" },
+  { name: "Fast Foods", icon: <Utensils size={32} />, bg: "#f3f4f6" },
+  { name: "Featured Foods", icon: <Pizza size={32} />, bg: "#f3f4f6" },
+];*/
 
-const defaultPages = [
+/*const defaultPages = [
   { path: "/home", icon: <Home size={24} />, label: "Home", content: <></> },
   { path: "/discovery", icon: <MapPin size={24} style={{ color: "#facc15" }} />, label: "Discovery", content: <></> },
   { path: "/bookmark", icon: <Bookmark size={24} />, label: "Bookmark", content: <></> },
   { path: "/profile", icon: <User size={24} />, label: "Profile", content: <></> },
-];
+];*/
 
-const Menu: FC<IMenuProps> = ({ pages = defaultPages, isMobile }) => {
+const Menu: FC<IMenuProps> = ({ pages = pages_settings, isMobile }) => {
     const [activePage, setActivePage] = useState<string>(pages[0].path); // Estado para la página activa
   
     return (
@@ -92,17 +93,17 @@ const Menu: FC<IMenuProps> = ({ pages = defaultPages, isMobile }) => {
     );
   };
 
-const Discovery: FC<{ pages?: IMenuProps["pages"], isMobile?: boolean }> = ({ pages = defaultPages, isMobile = false }) => {
+const Discovery: FC<{ pages?: IMenuProps["pages"], isMobile?: boolean }> = ({ pages = pages_settings, isMobile = false }) => {
     return (
       <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", mb: 8 }}>
-        <Typography variant="h5" sx={{ p: 2, fontWeight: "bold" }}>Discovery</Typography>
+        <Typography variant="h5" sx={{ p: 2, fontWeight: "bold" }}>Calculador de Salario</Typography>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 2, p: 2 }}>
-          {categories.map((cat, index) => (
-            <Card key={index} sx={{ p: 2, display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: cat.bg, borderRadius: 2, boxShadow: 2 }}>
+          {pages_settings.map((cat, index) => (
+            <Card key={index} sx={{ p: 2, display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: '#f3f4f6', borderRadius: 2, boxShadow: 2 }}>
               <CardMedia component="div">{cat.icon}</CardMedia>
               <CardContent sx={{ textAlign: "center" }}>
-                <Typography variant="h6" fontWeight="bold">{cat.name}</Typography>
-                <Typography variant="body2" color="textSecondary">{cat.places} Place</Typography>
+                <Typography variant="h6" fontWeight="bold">{cat.label}</Typography>
+                {/*<Typography variant="body2" color="textSecondary">{cat.places} Place</Typography>*/}
               </CardContent>
             </Card>
           ))}
