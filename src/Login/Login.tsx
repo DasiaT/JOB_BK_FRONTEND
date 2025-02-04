@@ -9,6 +9,9 @@ function Login() {
     const [user, setUser] = useState<IUser | null>(null);
     const [profile, setProfile] = useState<IProfile | null>(null);
 
+    console.log("User: ", user);
+    console.log("Profile: ", profile);
+    
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUser(codeResponse as IUser),
         onError: (error) => toast(`Error de login: ${error}`),
@@ -17,11 +20,15 @@ function Login() {
     useEffect(() => {
         if (user) {
             axios
-                .get<IProfile>(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=381023784359-2efkdnkr1j5s23ual1n4hg8bmjf1je2q.apps.googleusercontent.com`, {
+                .get<IProfile>(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
                     headers: {
-                        Authorization: `Bearer 381023784359-2efkdnkr1j5s23ual1n4hg8bmjf1je2q.apps.googleusercontent.com`,
+                        Authorization: `Bearer ${user.access_token}`,
                         Accept: 'application/json',
-                    },
+                    }
+                    /*,
+                    body:{
+                        client_id: 'CLIENT_ID.apps.googleusercontent.com'
+                    }*/
                 })
                 .then((res) => setProfile(res.data))
                 .catch((err) => toast(err));
