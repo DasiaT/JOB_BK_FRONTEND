@@ -5,10 +5,11 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import { HandCoins } from 'lucide-react';
 import Contrato from '../../Pages/Contrato/Contrato';
 import MultipleDateTimeRangePicker from '../Interface/pruebas';
+import Deducciones from '../../Pages/Deducciones/deducciones';
 
 export const pages_settings: IMenu[] = [
   { label: 'Configuracion de Contrato', icon: <RequestPageOutlinedIcon />, path: '/contract', content: <Contrato/> },
   { label: 'Pago Mes Actual', icon: <EuroIcon />, path: '/pago', content: '' },
   { label: 'Ingreso de Horas', icon: <CalendarMonthOutlinedIcon />, path: '/ingreso', content: <MultipleDateTimeRangePicker/> },
-  { label: 'Deducciones', icon: <HandCoins />, path: '/deducciones', content: '' },
+  { label: 'Deducciones', icon: <HandCoins />, path: '/deducciones', content: <Deducciones/> },
 ];
